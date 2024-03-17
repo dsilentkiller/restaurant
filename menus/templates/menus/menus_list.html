@@ -1,0 +1,92 @@
+{% extends 'menus/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-wrapper">
+
+    <form>   
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900  sticky-top sr-only dark:text-gray-300 ">Search</label>
+      <div class="relative ">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input type="search" name="search" id="search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required>
+          <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+      </div>
+  </form>
+        <div class="row">
+            <div class="card">
+                <div class='card-header'>Menus
+                  <a href="{% url 'menus:create'%}" class='p-6'> Add menus</a>
+                </div>
+                                <div class="card-body">
+                                    <div id="order-list">
+                                            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                                                {% for menus in object_list %}
+                                                    <div class="group relative">
+                                                        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                                                            <!--  <img src="{% static 'menus/dj-logo.jpg' %}" alt="menus Image" class="h-full w-full object-cover object-center lg:h-full lg:w-full" /> --> 
+                                                            <img src="{{ menus.image.url }}" alt="{{ menus.name }}" class="h-full w-full object-cover object-center lg:h-full lg:w-full menu-item-image"   data-item-id="{{menus.id }}"/>
+                                                        </div>
+                                                        <div class="mt-4 flex justify-between">
+                                                            <div>
+                                                                <h3 class="text-sm text-gray-700">
+                                                                    <!-- <a href="{% url 'menus:detail' menus.id %}">-->
+                                                                        <span aria-hidden="true" class="absolute inset-0"></span>
+                                                                        {{ menus.name }}
+                                                                    </a>
+                                                                </h3>
+                                                                <p class="mt-1 text-sm text-gray-500">{{ menus.category }}</p>
+                                                            </div>
+                                                            <p class="text-sm font-medium text-gray-900">{{ menus.price }}</p>
+                                                        </div>
+                                                        
+                                                <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 rounded mr-5"
+                                                                onclick="addToCart(this)"
+                                                                data-item-name="{{ menus.name }}"
+                                                                data-item-price="{{ menus.price }}">
+                                                            Order
+                                                        </button>
+
+                                                    </div>
+                                                    
+                                                    
+                                                {% endfor %}
+                                                
+                                            </div>  
+                                    </div>
+                                </div>
+      
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- /.container-fluid 
+  </section>-->
+</div>
+<!-- /.content -->
+   
+<script>
+    // Initialize cart as an empty array
+    let cart = [];
+  
+    // Function to add an item to the cart
+    function addToCart(item) {
+        console.log('adding to cart..')
+      const itemName = item.dataset.itemName;
+      const itemPrice = parseFloat(item.dataset.itemPrice);
+      console.log('item name..')
+      console.log('price..')
+  
+      // Add the item to the cart array
+      cart.push({ name: itemName, price: itemPrice });
+  
+      // Alert to confirm the item has been added to the cart (you can replace this with your own UI)
+      alert(`Added ${itemName} to the cart!`);
+  
+      // Optional: Update the cart display or perform other actions as needed
+      console.log(cart); // Example: Log the cart array to the console
+    }
+  </script>
+
+{% endblock %}

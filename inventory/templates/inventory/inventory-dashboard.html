@@ -1,0 +1,21 @@
+{% extends 'menus/base.html'%} {% block content %}
+<div
+  class="card max-w-80% p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-400"
+>
+  {% include './inventory-header.html' %}
+  <section class="text-gray-600 body-font overflow-hidden">
+    <div class="container col-md-4 px-20 py-24 mx-auto">
+      <div class="card-border">
+        <h1 class="btn btn-info">Inventory Dashboard</h1>
+        <div>
+          <p>Total Inventory Usage: {{ total_usage }}</p>
+          <p>Remaining Quantity in Kitchen: {{ remaining_in_kitchen }}</p>
+          <p>Remaining Quantity After Sales: {{ remaining_after_sales }}</p>
+        </div>
+      </div>
+      <div class="card"></div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

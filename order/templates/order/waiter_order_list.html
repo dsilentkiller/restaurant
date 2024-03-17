@@ -1,0 +1,23 @@
+{% extends '../menus/base.html' %} {% block content %}
+
+<div class="bg-gray-200 p-4">
+  <div class="max-w-xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Waiter Order List</h1>
+    <div id="order-list">
+      <!-- Order items will be dynamically added here -->
+      <!-- Example of a clickable order item -->
+      <div
+        class="flex items-center justify-between border-b border-gray-300 py-2 px-4 cursor-pointer hover:bg-gray-100"
+        data-item-name="Burger"
+        data-item-price="10"
+        onclick="addToCart(this)"
+      >
+        <div class="font-semibold">Burger</div>
+        <div>$10</div>
+      </div>
+      <!-- Add more order items here -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}

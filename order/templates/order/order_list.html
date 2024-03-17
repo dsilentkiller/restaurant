@@ -1,0 +1,56 @@
+{% extends '../menus/base.html' %} {% block content %}
+
+<link
+  href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+  rel="stylesheet"
+/>
+{% for object in object_list%}
+<div class="bg-gray-200 p-4">
+  <div class="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between mb-6">
+      <h1 class="text-xl font-bold">Kitchen Order Ticket</h1>
+      <p class="text-sm">{{ object.date }}</p>
+    </div>
+
+    <!-- Order Details -->
+    <div class="mb-6">
+      <h2 class="text-lg font-semibold mb-4">Order Details</h2>
+      <div class="flex justify-between items-center border-b pb-2">
+        <p class="font-semibold">{{ object.table_no }}</p>
+        <p>12</p>
+      </div>
+      <div class="flex justify-between items-center border-b pb-2">
+        <p class="font-semibold">Waiter :</p>
+        <p>{{ object.waiter }}</p>
+      </div>
+      <!-- Add more order details here as needed -->
+    </div>
+
+    <!-- Items -->
+    <div class="mb-6">
+      <h2 class="text-lg font-semibold mb-4">Items</h2>
+      <!-- Single Item -->
+      <div class="flex justify-between items-center mb-2">
+        <p>{{ object.item_name }}</p>
+        <p>{{ object.price }}</p>
+      </div>
+      <!-- Add more items here as needed -->
+    </div>
+
+    <!-- Actions -->
+    <div class="flex justify-between">
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+      >
+        Print
+      </button>
+      <button
+        class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock %}

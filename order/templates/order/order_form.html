@@ -1,0 +1,108 @@
+{% extends '../menus/base.html' %} {% block content %}
+
+<link
+  href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+  rel="stylesheet"
+/>
+
+<div class="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto">
+  <div class="bg-gray-200 p-4">
+    <div class="max-w-md mx-auto bg-white p-8 rounded-md shadow-md">
+      <h1 class="text-2xl font-semibold mb-4">Add Menu Item</h1>
+      <form method="post" action="{% url 'order:submit_form' %}">
+        {% csrf_token %}
+      
+          <!-- Item Name -->
+          <div class="mb-4">
+            <label
+              for="item_name"
+              class="block text-sm font-medium text-gray-700"
+              >Item Name:</label
+            >
+            <input
+              type="text"
+              name="item_name"
+              id="item_name"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <!-- Quantity -->
+          <div class="mb-4">
+            <label
+              for="quantity"
+              class="block text-sm font-medium text-gray-700"
+              >Quantity:</label
+            >
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+     
+        <div class="mb-4">
+            <label for="waiter" class="block text-sm font-medium text-gray-700">Waiter:</label>
+            <select name="waiter" id="waiter" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="john">John</option>
+                <option value="jane">Jane</option>
+                <option value="jack">Jack</option>
+            </select>
+        </div>
+          <!-- Table No -->
+          <div class="mb-4">
+            <label
+              for="table_no"
+              class="block text-sm font-medium text-gray-700"
+              >Table No:</label
+            >
+            <input
+              type="text"
+              name="table_no"
+              id="table_no"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <!-- Waiter -->
+          <div class="mb-4">
+            <label for="waiter" class="block text-sm font-medium text-gray-700"
+              >Waiter:</label
+            >
+            <input
+              type="text"
+              name="waiter"
+              id="waiter"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <!-- Price -->
+          <div class="mb-4">
+            <label for="price" class="block text-sm font-medium text-gray-700"
+              >Price:</label
+            >
+            <input
+              type="text"
+              name="price"
+              id="price"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </form>
+
+     
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

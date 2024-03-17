@@ -1,0 +1,77 @@
+{% extends '../menus/base.html' %} {% block content %}
+
+<div class="card max-w-80%  p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-400">
+    {% include './customer-header.html' %}
+  <div class="row">
+    <div class="card-title">
+        <h5 class="text-xl font-semibold">customer List</h5>
+      <div class="text-right">
+        
+        <a href="{% url 'customer:create' %}" class="btn btn-info text-right">
+         <h5>  Add customer</h5>
+        </a>
+      </div>
+      <form method="get" action="{% url 'customer:search' %}" class="max-w-md mx-auto">
+        <div class="relative">
+            <input
+            type="search"
+            id="default-search"
+            name='q'
+            class="block w-full pl-10 pr-4 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search Mockups, Logos..."
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-info"
+          >
+            Search
+          </button>
+      
+        </div>
+      </form>
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>address</th>
+              <th>phone</th>
+              <th>email</th>
+             
+              
+              <th col="3">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if object_list %} {% for customer in object_list %}
+            <tr>
+              <td>{{ customer.id}}</td>
+              <td>{{ customer.name }}</td>
+              <td>{{ customer.address }}</td>
+              <td>{{ customer.phone }}</td>
+              <td>{{ customer.email }}</td>
+             
+            
+              <td>
+                <a href="{% url 'customer:update' customer.id  %}"> Edit </a> | 
+                <a href="{% url 'customer:detail' customer.id %}"> View </a> |
+                <a href="{% url 'customer:delete' customer.id %}" > Delete </a>
+              </td>
+            </tr>
+          {% endfor %}
+          {% else %}
+            <tr><td colspan="8">No customer found</td></tr>
+          {% endif %}
+          
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+</div>
+<!-- /.content -->
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'menus/base.html' %} {% block content %}
+
+<!-- inventory_form.html -->
+<form method="post">
+  {{ formset.management_form }}
+  <table>
+    {% for form in formset %} {{ form }} {% endfor %}
+  </table>
+  <button type="button" id="add-item">Add Item</button>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const addButton = document.getElementById("add-item");
+    addButton.addEventListener("click", function () {
+      const formset = document.getElementById("id_form-TOTAL_FORMS");
+      const totalForms = parseInt(formset.value);
+      const newFormIndex = totalForms;
+      const newForm = document.createElement("tr");
+      newForm.innerHTML = `
+        <td>{{ formset.empty_form.category }}</td>
+        <td>{{ formset.empty_form.name }}</td>
+        <td>{{ formset.empty_form.description }}</td>
+        <td>{{ formset.empty_form.price }}</td>
+        <td>{{ formset.empty_form.quantity }}</td>
+      `;
+      document.querySelector("table").appendChild(newForm);
+      formset.value = totalForms + 1;
+    });
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'menus/base.html' %} {% block content %}
+
+<div class="card max-w-80%  p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-400">
+    {% include '../../inventory/inventory-header.html' %}
+  <div class="row">
+    <div class="flex items-center justify-between">
+        <h5 class="text-xl font-semibold">Purchase Bill List</h5> 
+        <a href="{% url 'inventory:purchase-create' %}" class="text-xl font-semibold text-grey-200 hover:underline hover:text-blue-00 ml-auto">
+         <h5 class="text-2xl font-semibold text-grey-800 mb-4" >  Add Purchase Bill</h5>
+        </a>
+     
+      <form method="get" action="{% url 'inventory:search' %}" class="max-w-md mx-auto justify-end">
+        <div class="relative flex-grow">
+            <input
+            type="search"
+            id="default-search"
+            name='q'
+            class="block w-full pl-10 pr-4 py-2 rounded-lg border-2 border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search Mockups, Logos..."
+            required
+          />
+          <button
+            type="submit"
+            class="absolute inset-y-0 right-0 px-4 py-2 bg-gray-300 text-gray-800 rounded-r-lg hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+          >
+            Search
+          </button>
+      
+        </div>
+      </form>
+    </div>
+      <div class="card-body">
+        <table class="table-auto w-full border-collapse border-grey-400 table-bordered ">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 border px-4 py-2" >#</th>
+              <th class="px-4 py-2  border ">Name</th>
+              <th class="px-4 py-2  border ">Category</th>
+              <th class="px-4 py-2  border ">Discription</th>
+              <th  class="px-4 py-2  border ">price</th>
+              <th class="px-4 py-2  border ">quantity</th>
+              <th class="px-4 py-2  border ">unit</th>           
+              <th col="3" class="px-0 py-0  border ">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if object_list %} {% for purchase in object_list %}
+            <tr>
+              <td class="border px-4 py-2">{{ purchase.id}}</td>
+              <td  class="border px-4 py-2">{{ purchase.name }}</td>
+              <td class="border px-4 py-2">{{ purchase.category }}</td>
+              <td class="border px-4 py-2">{{ purchase.discription }}</td>
+              <td class="border px-4 py-2">{{ purchase.price }}</td>
+              <td class="border px-4 py-2">{{ purchase.quantity }}</td>
+              <td class="border px-4 py-2">{{ purchase.unit}}</td>
+            
+              <td>
+                <a class="border px-4 py-2" href="{% url 'inventory:purchase-update' purchase.id  %}"> Edit </a> 
+                <a class="border px-4 py-2" href="{% url 'inventory:purchase-detail' purchase.id %}"> View </a> 
+                <a  class="border px-4 py-2" href="{% url 'inventory:purchase-delete' purchase.id %}" > Delete </a>
+              </td>
+            </tr>
+          {% endfor %}
+          {% else %}
+            <tr><td colspan="8" class="border px-4 py-2">No purchase found</td></tr>
+          {% endif %}
+          
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+</div>
+<!-- /.content -->
+{% endblock %}
