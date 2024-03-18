@@ -1,5 +1,6 @@
 from django.db import models
 from menus.models import Category
+from vendor.models import Vendor
 
 
 class PurchaseBill(models.Model):
@@ -9,6 +10,7 @@ class PurchaseBill(models.Model):
     price = models.FloatField()
     quantity = models.PositiveIntegerField()
     unit = models.CharField(max_length=100, null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
